@@ -21,8 +21,14 @@ class MusicTile extends ConsumerWidget {
         ref.read(playStateProvider.notifier).state = true;
         ref.read(currentMusicProvider.notifier).state = music;
       },
-      child: Card(
-        child: Text(music.filename),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        child: Card(
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Text(music.filename),
+          ),
+        ),
       ),
     );
   }
