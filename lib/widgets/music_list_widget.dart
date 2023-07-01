@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mozika/services/filesystem_services.dart';
+import 'package:mozika/widgets/music_tile_widget.dart';
 
 import '../models/music_model.dart';
 
@@ -26,12 +27,6 @@ class _MusicListWidgetState extends State<MusicListWidget> {
 
   @override
   Widget build(BuildContext context) {
-    // return GridView(
-    //   gridDelegate:
-    //       const SliverGridDelegateWithMaxCrossAxisExtent(
-    //     maxCrossAxisExtent: double.infinity,
-    //   ),
-    // );
     return FutureBuilder(
       future: musics,
       builder: (context, snapshot) {
@@ -39,7 +34,12 @@ class _MusicListWidgetState extends State<MusicListWidget> {
           return ListView.builder(
             itemCount: snapshot.data!.length,
             itemBuilder: (context, i) {
-              return Text(snapshot.data![i].filename);
+              return InkWell(
+                onTap: () {},
+                child: MusicTile(
+                  music: snapshot.data![i],
+                ),
+              );
             },
           );
         } else {

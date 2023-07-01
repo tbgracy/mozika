@@ -20,4 +20,8 @@ class CacheService {
     );
     return result;
   }
+
+  static Future<List<String>> getSearchHistory(){
+    throw UnimplementedError();
+  }
 }
