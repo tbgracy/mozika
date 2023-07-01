@@ -9,8 +9,7 @@ class FileSystemService {
     var dir = Directory(musicDirectory);
 
     for (var entity in dir.listSync(recursive: true)) {
-      // print(p.extension(entity.path));
-      if (p.extension(entity.path) == '.mp3') {
+      if (p.extension(entity.path) == '.mp3') {        
         result.add(Music(filename: p.basename(entity.path), path: entity.path));
       }
     }

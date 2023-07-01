@@ -41,6 +41,8 @@ dependencies:
   path_provider: ^2.0.15
   dartz: ^0.10.1
   flutter_riverpod: ^2.3.6
+  audioplayers: ^4.1.0
+  dart_tags: ^0.4.0
 
 dev_dependencies:
   flutter_test:

@@ -34,11 +34,8 @@ class _MusicListWidgetState extends State<MusicListWidget> {
           return ListView.builder(
             itemCount: snapshot.data!.length,
             itemBuilder: (context, i) {
-              return InkWell(
-                onTap: () {},
-                child: MusicTile(
-                  music: snapshot.data![i],
-                ),
+              return MusicTile(
+                music: snapshot.data![i],
               );
             },
           );
