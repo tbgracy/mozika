@@ -21,7 +21,7 @@ class _MusicPlayerWidgetState extends ConsumerState<MusicPlayerWidget> {
       width: double.infinity,
       height: 100,
       decoration: const BoxDecoration(
-        color: Colors.pink,
+        color: Colors.teal,
       ),
       child: Center(
         child: Column(

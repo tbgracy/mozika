@@ -7,9 +7,8 @@ void main() {
   runApp(
     ProviderScope(
       child: MaterialApp(
-        theme: ThemeData(
+        theme: ThemeData.dark(
           useMaterial3: true,
-          primarySwatch: Colors.pink,
         ),
         home: const HomePage(),
       ),
