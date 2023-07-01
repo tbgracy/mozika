@@ -20,8 +20,9 @@ class HomePage extends ConsumerStatefulWidget {
 class _HomePageState extends ConsumerState<HomePage> {
   var musicDirectory = CacheService.getMusicDirectory();
   final searchBarHeight = 70.0;
-  final searchBarController = TextEditingController();
+  final searchbarController = TextEditingController();
   List<Music> searchResult = [];
+  List<String> searchSuggestions = [];
 
   void _chooseDirectory() async {
     setState(() {
@@ -34,11 +35,17 @@ class _HomePageState extends ConsumerState<HomePage> {
     });
   }
 
-  void _searchMusic(String keyword) async {
-    final res = await SearchService.searchMusic(keyword);
+  void _searchMusic() async {
+    final res = await SearchService.searchMusic(searchbarController.text);
     setState(() {
       searchResult = res;
     });
+  }
+
+  @override
+  void initState() {
+    searchbarController.addListener(_searchMusic);
+    super.initState();
   }
 
   @override
@@ -56,8 +63,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                     padding: const EdgeInsets.all(8.0),
                     child: SearchBar(
                       leading: const Icon(Icons.search),
-                      onChanged: _searchMusic,
-                      controller: searchBarController,
+                      controller: searchbarController,
                     ),
                   ),
                 ),
@@ -85,12 +91,15 @@ class _HomePageState extends ConsumerState<HomePage> {
                     },
                   ),
                 ),
-                MusicPlayerWidget(),
+                const MusicPlayerWidget(),
               ],
             ),
-            if (searchResult.isNotEmpty)
+            if (searchResult.isNotEmpty || searchSuggestions.isNotEmpty)
               SearchWidgetResult(
-                  topMargin: searchBarHeight, result: searchResult),
+                topMargin: searchBarHeight,
+                autosuggestions: ['Gracy', 'Glorio'],
+                musics: searchResult,
+              ),
           ],
         ),
       ),
