@@ -1,20 +1,23 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../models/music_model.dart';
 import '../services/cache_services.dart';
 import '../services/search_service.dart';
 import '../widgets/folder_picker_widget.dart';
 import '../widgets/music_list_widget.dart';
+import '../widgets/music_player_widget.dart';
+import '../widgets/search_result_widget.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends ConsumerState<HomePage> {
   var musicDirectory = CacheService.getMusicDirectory();
   final searchBarHeight = 70.0;
   final searchBarController = TextEditingController();
@@ -82,48 +85,13 @@ class _HomePageState extends State<HomePage> {
                     },
                   ),
                 ),
-                Container(
-                  width: double.infinity,
-                  height: 100,
-                  decoration: const BoxDecoration(
-                    color: Colors.pink,
-                  ),
-                ),
+                MusicPlayerWidget(),
               ],
             ),
             if (searchResult.isNotEmpty)
               SearchWidgetResult(
                   topMargin: searchBarHeight, result: searchResult),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class SearchWidgetResult extends StatelessWidget {
-  const SearchWidgetResult({
-    super.key,
-    required this.topMargin,
-    required this.result,
-  });
-
-  final double topMargin;
-  final List<Music> result;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(top: topMargin),
-      child: SizedBox(
-        width: double.infinity,
-        child: Card(
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: result.map((e) => Text(e.filename)).toList(),
-            ),
-          ),
         ),
       ),
     );

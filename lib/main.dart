@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'pages/home_page.dart';
 
 void main() {
   runApp(
-    MaterialApp(
-      theme: ThemeData(
-        useMaterial3: true,
-        primarySwatch: Colors.pink,
+    ProviderScope(
+      child: MaterialApp(
+        theme: ThemeData(
+          useMaterial3: true,
+          primarySwatch: Colors.pink,
+        ),
+        home: const HomePage(),
       ),
-      home: const HomePage(),
     ),
   );
 }
